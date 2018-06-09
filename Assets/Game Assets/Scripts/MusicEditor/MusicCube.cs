@@ -60,12 +60,12 @@ public class MusicCube : MonoBehaviour {
     private void OnMouseDown()
     {
         if (++note > 23) note = -12;
-
-
-        int realOctave = (int)(GetCurrentOctave() * Mathf.Sign(note));
-        Debug.Log(realOctave);
-
         UpdateNoteDisplay();
+    }
+
+    public void PlayCube()
+    {
+        int realOctave = (int)(GetCurrentOctave() * Mathf.Sign(note));
         audioPool.PlayNote(0, realOctave, note);
     }
 }
