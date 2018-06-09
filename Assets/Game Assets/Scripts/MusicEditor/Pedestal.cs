@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Pedestal : MonoBehaviour {
     MusicCube linkedCube;
+    Material baseMaterial;
+    Color startColor;
 
 	// Use this for initialization
 	void Start () {
-		
+        baseMaterial = GetComponent<Renderer>().materials[0];
+        startColor = baseMaterial.GetColor("_Color");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        baseMaterial.SetColor("_Color", Color.Lerp(baseMaterial.GetColor("_Color"), startColor, 0.05f));
 	}
 
     public void PlayLinked()
     {
+        baseMaterial.SetColor("_Color", new Color(0.1f, 0.1f, 0.1f));
+
         if (linkedCube != null)
         {
             linkedCube.PlayCube();
@@ -31,8 +36,6 @@ public class Pedestal : MonoBehaviour {
         {
             linkedCube = musicCube;
         }
-
-        Debug.Log("Linked!");
     }
 
     private void OnCollisionStay(Collision collision)
@@ -63,7 +66,5 @@ public class Pedestal : MonoBehaviour {
         {
             linkedCube = null;
         }
-
-        Debug.Log("Unlinked!");
     }
 }

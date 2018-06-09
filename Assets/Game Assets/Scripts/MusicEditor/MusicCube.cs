@@ -20,14 +20,9 @@ public class MusicCube : MonoBehaviour {
         UpdateNoteDisplay();
 	}
 
-    int Mod(float a, float b)
-    {
-        return (int) (a - b * Mathf.Floor(a / b));
-    }
-
     int GetCurrentNote()
     {
-        return Mod(note, 12);
+        return Mathx.Mod(note, 12);
     }
 
     int GetCurrentOctave()

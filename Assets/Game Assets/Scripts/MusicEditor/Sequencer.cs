@@ -7,7 +7,7 @@ public class Sequencer : MonoBehaviour {
     private float timer = 0f;
     private float timerInterval = 0.4f;
     private int currentStep = 0;
-    private int maxStep = 3;
+    private int maxStep = 31;
 
 	// Use this for initialization
 	void Start () {
@@ -22,10 +22,8 @@ public class Sequencer : MonoBehaviour {
         {
             foreach (GameObject pedestalCollection in pedestalCollections)
             {
-                Debug.Log(pedestalCollection);
-                Debug.Log(pedestalCollection.transform.GetChild(currentStep));
-                Debug.Log(pedestalCollection.transform.GetChild(currentStep).GetComponent<Pedestal>());
-                pedestalCollection.transform.GetChild(currentStep).GetComponent<Pedestal>().PlayLinked();
+                pedestalCollection.transform.GetChild(Mathx.Mod(currentStep, pedestalCollection.transform.childCount))
+                    .GetComponent<Pedestal>().PlayLinked();
             }
 
             if (++currentStep > maxStep) currentStep = 0;
