@@ -7,6 +7,8 @@ public class Pedestal : MonoBehaviour {
     Material baseMaterial;
     Color startColor;
 
+    float changeTime = 0f;
+
 	// Use this for initialization
 	void Start () {
         baseMaterial = GetComponent<Renderer>().materials[0];
@@ -15,12 +17,20 @@ public class Pedestal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        baseMaterial.SetColor("_Color", Color.Lerp(baseMaterial.GetColor("_Color"), startColor, 0.05f));
-	}
+        if (changeTime > 0f)
+        {
+            changeTime -= Time.deltaTime;
+        }
+        else
+        {
+            baseMaterial.SetColor("_Color", Color.Lerp(baseMaterial.GetColor("_Color"), startColor, 10f * Time.deltaTime));
+        }
+    }
 
     public void PlayLinked()
     {
-        baseMaterial.SetColor("_Color", new Color(0.1f, 0.1f, 0.1f));
+        changeTime = 0.2f;
+        baseMaterial.SetColor("_Color", new Color(1f - startColor.r, 1f - startColor.g, 1f - startColor.b));
 
         if (linkedCube != null)
         {

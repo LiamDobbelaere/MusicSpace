@@ -5,6 +5,7 @@ using UnityEngine;
 public class Global : MonoBehaviour {
     public Texture[] noteTextures = new Texture[12];
     public Texture[] octaveTextures = new Texture[5];
+    public Color[] instrumentColors = new Color[2];
 
     // Use this for initialization
     void Start () {

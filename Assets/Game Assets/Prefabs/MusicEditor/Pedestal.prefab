@@ -23,12 +23,13 @@ GameObject:
   - component: {fileID: 23906930153735078}
   - component: {fileID: 65030206924639350}
   - component: {fileID: 54962236498831032}
+  - component: {fileID: 114874473394526608}
   m_Layer: 0
   m_Name: Pedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4173783871501644
 Transform:
@@ -36,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159204719750686}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.98, y: -1.295, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 3.2529445, y: 5.31064, z: -6.4123907}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,3 +114,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9144, y: 0.9144002, z: 0.914351}
   m_Center: {x: -0.0000013113022, y: 0.0000047981753, z: 0.45722842}
+--- !u!114 &114874473394526608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159204719750686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e9ff484776cfb49b7f58d2383f76e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

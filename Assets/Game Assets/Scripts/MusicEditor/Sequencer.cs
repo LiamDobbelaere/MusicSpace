@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sequencer : MonoBehaviour {
     private GameObject[] pedestalCollections;
     private float timer = 0f;
-    private float timerInterval = 0.4f;
+    private float timerInterval = 0.2f;
     private int currentStep = 0;
     private int maxStep = 31;
 
@@ -16,6 +16,7 @@ public class Sequencer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        timerInterval = 0.35f;
         timer += Time.deltaTime;
 
         if (timer > timerInterval)

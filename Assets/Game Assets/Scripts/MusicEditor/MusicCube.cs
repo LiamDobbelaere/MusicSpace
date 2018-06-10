@@ -8,13 +8,18 @@ public class MusicCube : MonoBehaviour {
 
     private int note = -12;
     private Material noteMaterial;
+    private Material baseMaterial;
 
+    public int instrument = 0;
+    
 	// Use this for initialization
 	void Start () {
         var globalObject = GameObject.Find("Global");
         global = globalObject.GetComponent<Global>();
         audioPool = globalObject.GetComponent<AudioPool>();
 
+
+        baseMaterial = GetComponent<Renderer>().materials[0];
         noteMaterial = GetComponent<Renderer>().materials[1];
 
         UpdateNoteDisplay();
@@ -42,6 +47,7 @@ public class MusicCube : MonoBehaviour {
         int sub = 0;
         if (note < 0) sub = 1;
 
+        baseMaterial.SetColor("_Color", global.instrumentColors[instrument]);
         noteMaterial.SetTexture("_MainTex", global.noteTextures[GetCurrentNote()]);
         noteMaterial.SetTexture("_DetailAlbedoMap", global.octaveTextures[(GetCurrentOctave() * 2) - sub]);
     }
@@ -52,15 +58,23 @@ public class MusicCube : MonoBehaviour {
 
 	}
 
-    private void OnMouseDown()
+    public void NextNote()
     {
         if (++note > 23) note = -12;
         UpdateNoteDisplay();
+        PlayCube();
+    }
+
+    public void PreviousNote()
+    {
+        if (--note < -12) note = 23;
+        UpdateNoteDisplay();
+        PlayCube();
     }
 
     public void PlayCube()
     {
         int realOctave = (int)(GetCurrentOctave() * Mathf.Sign(note));
-        audioPool.PlayNote(0, realOctave, note);
+        audioPool.PlayNote(instrument, realOctave, note);
     }
 }

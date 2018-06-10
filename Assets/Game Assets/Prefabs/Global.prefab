@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548467027613250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.017776012, y: -1.5189705, z: -10.26026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,6 +91,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 37e5eb5b3e267864882ac21506f48abb, type: 3}
     - {fileID: 8300000, guid: b085c2515d3a8d940a4638cc8a2d3adf, type: 3}
     - {fileID: 8300000, guid: 01495af42e27e1e48969aca7bc04b332, type: 3}
+  - notes:
+    - {fileID: 8300000, guid: 72086546f745c364ebb1ba1938458376, type: 3}
+    - {fileID: 8300000, guid: 0b14eea3ecb613044be572310e219f77, type: 3}
+    - {fileID: 8300000, guid: 3d24b3803dfb7c34daa12ca9a4e9cffa, type: 3}
+    - {fileID: 8300000, guid: 58e4e9dd48a3774488d9aeedc32b7904, type: 3}
 --- !u!114 &114577836135106914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,3 +137,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: b35e7a9a16118b041b44e1cce5a9c2ba, type: 3}
   - {fileID: 2800000, guid: cfc0d8501d0229e4ea2655d507f013be, type: 3}
   - {fileID: 2800000, guid: 7035d08ddd9a7e6419a5fdd688207707, type: 3}
+  instrumentColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}

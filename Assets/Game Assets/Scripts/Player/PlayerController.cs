@@ -17,9 +17,15 @@ public class PlayerController : MonoBehaviour {
     
     private Vector3 moveDirection = Vector3.zero;
 
+    public string interactMessage;
+
+    private Transform pickupPoint;
+    private Rigidbody pickedupObject;
+
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
+        pickupPoint = Camera.main.transform.Find("PickupPoint");
         normalHeight = controller.height;
         crouchHeight = normalHeight / 2f;
         currentSpeed = speed;
@@ -27,6 +33,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        UpdateMovement();
+        UpdateInteraction();
+    }
+
+    void UpdateMovement()
+    {
         currentSpeed = Input.GetButton("Sprint") ? sprintSpeed : speed;
 
         float mouseInput = Input.GetAxisRaw("Mouse X");
@@ -56,6 +68,56 @@ public class PlayerController : MonoBehaviour {
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    void UpdateInteraction()
+    {
+        interactMessage = "";
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 2.5f))
+        {
+            Transform objectHit = hit.transform;
+
+            if (hit.transform.GetComponent<MusicCube>() != null)
+            {
+                if (pickedupObject == null)
+                {
+                    interactMessage = "Pick up";
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        pickedupObject = hit.transform.GetComponent<Rigidbody>();
+                        pickedupObject.isKinematic = true;
+                        //pickedupObject.GetComponent<BoxCollider>().enabled = false;
+                    }
+                }
+
+                var mc = hit.transform.GetComponent<MusicCube>();
+                if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+                {
+                    mc.NextNote();
+                }
+                else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+                {
+                    mc.PreviousNote();
+                }
+            }
+        }
+
+        if (pickedupObject != null)
+        {
+            pickedupObject.MovePosition(pickupPoint.position);
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                pickedupObject.isKinematic = false;
+                //pickedupObject.GetComponent<BoxCollider>().enabled = true;
+                pickedupObject = null;
+            }
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

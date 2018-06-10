@@ -34,8 +34,11 @@ public class AudioPool : MonoBehaviour {
         AudioSource source = audioSources[currentSource];
         
         //source.pitch = (1f + octave) + note * (1f / 12f);
-        source.PlayOneShot(instruments[instrument].notes[note + 12]);
-        
+        if (note + 12 < instruments[instrument].notes.Length)
+        {
+            source.PlayOneShot(instruments[instrument].notes[note + 12]);
+        }
+
         if (++currentSource >= audioSources.Length) currentSource = 0;
     }
 }
