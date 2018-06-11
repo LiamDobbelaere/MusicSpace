@@ -6,14 +6,15 @@ public class MusicCube : MonoBehaviour {
     private Global global;
     private AudioPool audioPool;
 
-    private int note = -12;
     private Material noteMaterial;
     private Material baseMaterial;
 
     public int instrument = 0;
-    
-	// Use this for initialization
-	void Start () {
+    public int note = -12;
+    public bool linked = false;
+
+    // Use this for initialization
+    void Start () {
         var globalObject = GameObject.Find("Global");
         global = globalObject.GetComponent<Global>();
         audioPool = globalObject.GetComponent<AudioPool>();
@@ -25,12 +26,12 @@ public class MusicCube : MonoBehaviour {
         UpdateNoteDisplay();
 	}
 
-    int GetCurrentNote()
+    public int GetCurrentNote()
     {
         return Mathx.Mod(note, 12);
     }
 
-    int GetCurrentOctave()
+    public int GetCurrentOctave()
     {
         if (note < 0)
         {
@@ -56,7 +57,7 @@ public class MusicCube : MonoBehaviour {
     void Update () {
         //audioPool.Play(0, pitch);
 
-	}
+    }
 
     public void NextNote()
     {

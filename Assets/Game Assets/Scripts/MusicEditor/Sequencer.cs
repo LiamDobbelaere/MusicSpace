@@ -14,6 +14,12 @@ public class Sequencer : MonoBehaviour {
         pedestalCollections = GameObject.FindGameObjectsWithTag("PedestalCollection");
 	}
 	
+    public void ResetSequencer()
+    {
+        currentStep = 0;
+        timer = 0f;
+    }
+
 	// Update is called once per frame
 	void Update () {
         timerInterval = 0.35f;
@@ -23,8 +29,11 @@ public class Sequencer : MonoBehaviour {
         {
             foreach (GameObject pedestalCollection in pedestalCollections)
             {
-                pedestalCollection.transform.GetChild(Mathx.Mod(currentStep, pedestalCollection.transform.childCount))
-                    .GetComponent<Pedestal>().PlayLinked();
+                if (pedestalCollection.GetComponent<PedestalCollection>().isActive)
+                {
+                    pedestalCollection.transform.GetChild(Mathx.Mod(currentStep, pedestalCollection.transform.childCount))
+                        .GetComponent<Pedestal>().PlayLinked();
+                }
             }
 
             if (++currentStep > maxStep) currentStep = 0;

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pedestal : MonoBehaviour {
-    MusicCube linkedCube;
-    Material baseMaterial;
-    Color startColor;
-
-    float changeTime = 0f;
-
+    private MusicCube linkedCube;
+    private Material baseMaterial;
+    private Color startColor;
+    private float changeTime = 0f;
+    
 	// Use this for initialization
 	void Start () {
         baseMaterial = GetComponent<Renderer>().materials[0];
@@ -30,7 +29,7 @@ public class Pedestal : MonoBehaviour {
     public void PlayLinked()
     {
         changeTime = 0.2f;
-        baseMaterial.SetColor("_Color", new Color(1f - startColor.r, 1f - startColor.g, 1f - startColor.b));
+        baseMaterial.SetColor("_Color", Color.white);
 
         if (linkedCube != null)
         {
@@ -42,9 +41,11 @@ public class Pedestal : MonoBehaviour {
     {
         MusicCube musicCube = collision.gameObject.GetComponent<MusicCube>();
 
-        if (musicCube != null)
+        if (musicCube != null && linkedCube == null && !musicCube.linked)
         {
             linkedCube = musicCube;
+            linkedCube.linked = true;
+            linkedCube.gameObject.layer = LayerMask.NameToLayer("MusicCubeLinked");
         }
     }
 
@@ -74,6 +75,8 @@ public class Pedestal : MonoBehaviour {
 
         if (linkedCube == musicCube)
         {
+            linkedCube.linked = false;
+            linkedCube.gameObject.layer = LayerMask.NameToLayer("MusicCube");
             linkedCube = null;
         }
     }
