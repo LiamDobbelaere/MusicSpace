@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pedestal : MonoBehaviour {
-    private MusicCube linkedCube;
+    public MusicCube linkedCube;
     private Material baseMaterial;
     private Color startColor;
     private float changeTime = 0f;
@@ -46,6 +46,13 @@ public class Pedestal : MonoBehaviour {
             linkedCube = musicCube;
             linkedCube.linked = true;
             linkedCube.gameObject.layer = LayerMask.NameToLayer("MusicCubeLinked");
+            /*else
+            {
+                Debug.Log("Force application");
+                musicCube.gameObject.GetComponent<Rigidbody>().AddForce(
+                    new Vector3(Random.Range(-500f, 500f), Random.Range(300f, 500f), Random.Range(-500f, 500f))
+                    );
+            }*/
         }
     }
 

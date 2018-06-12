@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour {
 
     private Transform pickupPoint;
     private Rigidbody pickedupObject;
+    private Respawnable respawnable;
 
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
+        respawnable = GetComponent<Respawnable>();
         pickupPoint = Camera.main.transform.Find("PickupPoint");
         normalHeight = controller.height;
         crouchHeight = normalHeight / 2f;
@@ -35,6 +37,11 @@ public class PlayerController : MonoBehaviour {
     void Update () {
         UpdateMovement();
         UpdateInteraction();
+
+        if (controller.isGrounded)
+        {
+            respawnable.startPosition = transform.position;
+        }
     }
 
     void UpdateMovement()
@@ -83,7 +90,9 @@ public class PlayerController : MonoBehaviour {
 
             if (hit.transform.GetComponent<MusicCube>() != null)
             {
-                if (pickedupObject == null)
+                var musicCubeComponent = hit.transform.GetComponent<MusicCube>();
+
+                if (pickedupObject == null && !musicCubeComponent.permaLock)
                 {
                     interactMessage = "Pick up";
 

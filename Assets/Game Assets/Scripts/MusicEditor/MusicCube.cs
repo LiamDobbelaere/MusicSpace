@@ -13,6 +13,9 @@ public class MusicCube : MonoBehaviour {
     public int note = -12;
     public bool linked = false;
 
+    [Tooltip("Permanently locks the cube when it connects to a pedestal.")]
+    public bool permaLock = false;
+
     // Use this for initialization
     void Start () {
         var globalObject = GameObject.Find("Global");
