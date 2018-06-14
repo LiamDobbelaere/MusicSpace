@@ -5,12 +5,15 @@ using UnityEngine;
 public class AutoBridge : MonoBehaviour {
     public int count;
     public Vector3 direction;
+    public bool autoUnroll = false;
 
     private bool triggered;
+
 
 	// Use this for initialization
 	void Start () {
         triggered = false;
+        if (autoUnroll) Unroll();
     }
 	
 	// Update is called once per frame

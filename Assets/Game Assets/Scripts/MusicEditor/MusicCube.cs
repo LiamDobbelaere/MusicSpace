@@ -54,6 +54,7 @@ public class MusicCube : MonoBehaviour {
         baseMaterial.SetColor("_Color", global.instrumentColors[instrument]);
         noteMaterial.SetTexture("_MainTex", global.noteTextures[GetCurrentNote()]);
         noteMaterial.SetTexture("_DetailAlbedoMap", global.octaveTextures[(GetCurrentOctave() * 2) - sub]);
+        noteMaterial.SetTexture("_DetailMask", global.octaveTextures[(GetCurrentOctave() * 2) - sub]);
     }
 
     // Update is called once per frame
